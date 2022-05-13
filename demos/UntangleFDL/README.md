@@ -1,43 +1,37 @@
-# Persistent Homology Makes Force-Directed Layouts Better
-
-## IEEE VIS 2021 Submission #1455
+# Untangling Force-Directed Layouts with Persistent Homology
 
 
-## Goal
-The main purpose of our project is to use H0 and H1 persistent homology features to generate better graph layouts that bring out the characteristics of the topology that will otherwise remain hidden by the layout. We provide a topology-guided initial graph layout algorithm and interactive persistence bars that manipulate the attractive force in the visualization. Two columns of bars representing H0 and H1 features are shown on the left, and when hovered over by the mouse pointer, they highlight the corresponding persistent feature in the visualization.
+## Abstract
+
+Force-directed layouts belong to a popular class of methods used to position nodes in a node-link diagram. However, they typically lack direct consideration of global structures, which can result in visual clutter and the overlap of unrelated structures. In this paper, we use the principles of persistent homology to untangle force-directed layouts thus mitigating these issues. First, we devise a new method to use 0-dimensional persistent homology to efficiently generate an initial graph layout. The approach results in faster convergence and better quality graph layouts. Second, we provide a new definition and an efficient algorithm for 1-dimensional persistent homology features (i.e., tunnels/cycles) on graphs. We then provide users the ability to interact with these 1-dimensional features by highlighting them and adding cycle-emphasizing forces to the layout. Finally, we evaluate our approach with 32 synthetic and real-world graphs by computing various metrics, e.g., co-ranking, edge crossing, crossing angle, and angular displacements, to demonstrate the efficacy of our proposed method.
 
 
-## Running the demo
+## To run the demo:
 
-Open a terminal and navigate to the project directory
+We have tested this setup on Mac and Linux distributions. 
 
-    % cd PH_On_Graphs
+### [required] Install python3
 
-Run the webserver from the terminal window.
+    On Debian linux, such as Ubuntu
+    > sudo apt install python3
 
-For Python 2, use the below command in the terminal
+    On Mac, you can download from python.org, macports, or homebrew. You will need python3. 
+
+### [required] Run the code
+
+    Run the code
+    > ./run.sh
     
-    % python -m SimpleHTTPServer 8000
-
-For Python 3, use the below command in the terminal
+    Everything should be installed and the code will run. If everything goes as planned, a web browser will be opened automatically for you when everything is done. If it doesn't, you can open a web browser and go to http://localhost:5350/.
     
-    % python -m http.server 8000
+    
+## Citation
 
-If you can see the ' Serving HTTP on...' message in the terminal, then in the web browser, open
-    "http://localhost:8000"    
+Bhavana Doppalapudi, Bei Wang, and Paul Rosen. *Untangling Force-Directed Layouts Using Persistent Homology*, under review at IEEE VIS, 2022
 
-* A different port can also be used just by replacing 8000 in the above commands.
+Ashley Suh, Mustafa Hajij, Bei Wang, Carlos Scheidegger, and Paul Rosen. *Persistent Homology Guided Force-Directed Graph Layouts*, IEEE Transactions on Visualization and Computer Graphics (Proceedings of InfoVIS), 2019
 
 
- ## Implementation and Interaction
- 
-We used D3 and JavaScript to implement the visualizations.  The web page provides the user with an option of choosing different datasets from the drop-down provided. The selected dataset will be visualized. 
-
-You can also choose from various initial layout methods available from the button options provided below the dataset drop-down. The random layout will be the default visualization method.
-
-The slider can be used to manipulate the threshold, and based on the value, the corresponding H0 and H1 feature bars fade when not applicable.
-
-H0 and H1 feature bars can be chosen, and the corresponding features will be highlighted in the visualization. 
-
-All the layouts and performance metrics for all the datasets are shown on the 'initial layout figures' page. Furthermore, other figures from the paper are available on their associated pages.
-
+## Acknowledgements
+    
+This work was partially supported by the National Science Foundation (IIS-1513616, IIS-1845204, and DBI-1661375), Department of Energy (DOE) DE-SC0021015, CRA-W Collaborative Research Experiences for Undergraduates (CREU) program, DARPA CHESS FA8750-19-C-0002, and an NVIDIA Academic Hardware Grant.

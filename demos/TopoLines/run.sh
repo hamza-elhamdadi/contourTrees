@@ -24,7 +24,8 @@ if [ ! -d "venv/" ]; then
   pip install --upgrade pip
 
   # Within the activated environment, use the following command to install Flask and dependancies:
-  pip install wheel numpy sklearn simplejson Flask python-dotenv watchdog blinker gunicorn matplotlib colorutils
+  pip install wheel
+  pip install numpy sklearn simplejson Flask python-dotenv watchdog blinker gunicorn matplotlib colorutils
 
   # Install Entropy library
   git clone https://github.com/raphaelvallat/entropy.git entropy/

@@ -19,8 +19,9 @@ if [ ! -d "venv/" ]; then
   pip install --upgrade pip
 
   #Within the activated environment, use the following command to install Flask and dependancies:
-  pip install wheel sklearn numpy flask matplotlib
-  
+  pip install wheel
+  pip install sklearn numpy flask matplotlib
+
 else
 
   # Activate the environment
