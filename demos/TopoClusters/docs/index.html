@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <script src="https://d3js.org/d3.v4.js" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js" crossorigin="anonymous"></script>
+
+	<script src="javascript/common.js"></script>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+	<title>Modeling the Influence of Visual Density on Cluster Perception in Scatterplots Using Topology</title>
+
+</head>
+<body>
+
+<div class="page" style="padding: 15px; background-color: #ecead3; background-size: contain; background-repeat: no-repeat; background-position: right center; background-image: url(images/background.png);">
+        <h2 style="margin: 0; font-weight: bold;">TopoCluster: Modeling the Influence of Visual Density on Cluster Perception in<br>Scatterplots Using Topology</h2>
+</div>
+
+<div style="width: 90%; padding: 40px; padding-bottom:0; text-align: justify;">
+    <h4>Abstract</h4>
+    Scatterplots are used for a variety of visual analytics tasks, including cluster identification, and the visual encodings used on a scatterplot play a deciding role on the level of visual separation of clusters. For visualization designers, optimizing the visual encodings is crucial to maximizing the clarity of data. This requires accurately modeling human perception of cluster separation, which remains challenging. We present a multi-stage user study focusing on 4 factors---<font style="font-style: italic;">distribution size of clusters</font>, <font style="font-style: italic;">number of points</font>, <font style="font-style: italic;">size of points</font>, and <font style="font-style: italic;">opacity of points</font>---that influence cluster identification in scatterplots. From these parameters, we have constructed 2 models, a distance-based model, and a density-based model, using the merge tree data structure from Topological Data Analysis. Our analysis demonstrates that these factors play an important role in the number of clusters perceived, and it verifies that the distance-based and density-based models can reasonably estimate the number of clusters a user observes. Finally, we demonstrate how these models can be used to optimize visual encodings on real-world data.
+</div>
+
+<div style="padding: 40px;" id="load_files">
+    <input type="file" id="selectFiles" value="Import" /><button id="import">Import</button>
+</div>
+    
+<div id="show_results" style="width: 90%; padding: 40px; padding-bottom:0; text-align: justify; display: none;">
+
+    <div style="display: flex;">
+    <div class="form-group" style="width: 250px; margin-right: 15px;">
+        <label for="num_points">POINT COUNT ADJUSTMENT</label>
+        <input type="range" class="custom-range" min="1" max="100" step="1" value="100" id="num_points" name="num_points" oninput="updateNumbers()" onmouseup="updateImage();">
+        <span>Number of Points: </span><span id="current_points">100%</span>
+    </div>
+    <div class="form-group" style="width: 250px; margin-right: 15px;">
+        <label for="opp_amnt">OPACITY ADJUSTMENT</label>
+        <input type="range" class="custom-range" min="1" max="100" step="1" value="100" id="opp_amnt" name="opp_amnt" oninput="updateNumbers()" onmouseup="updateImage();">
+        <span>Opacity of Points: </span><span id="current_opacity">100%</span>
+    </div>
+    <div class="form-group" style="width: 250px">
+        <label for="pnt_size">POINT SIZE ADJUSTMENT</label>
+        <input type="range" class="custom-range" min="1" max="20" step="1" value="7" id="pnt_size" name="pnt_size" oninput="updateNumbers()" onmouseup="updateImage();">
+        <span>Size of Points: </span><span id="current_size">8</span>
+    </div>
+    </div>
+
+
+    <div id="visualization" style="padding-bottom: 0; width: 1200px; padding: 20px;">
+        <div id="plot_div" style="white-space: nowrap; text-align: center">
+            <svg width="450" height="700" style="border: none;" id="linechart"></svg><img id="scatterplot" />
+        </div>
+    </div>
+    
+
+    <div class="sidebar" style="width: 100%; display: flex;">
+        <div class="form-group" style="width: 250px; margin-right: 15px;">
+            <label for="override_x_min">X Override</label>
+            <input type="range" class="custom-range" min="0" max="1" step="0.01" value="1" id="override_x_max" name="override_x_max" onchange="updateVis();">
+        </div>
+        <div class="form-group" style="width: 250px; margin-right: 15px;">
+            <label for="override_y_min">Y Override</label>
+            <input type="range" class="custom-range" min="0" max="1" step="0.01" value="1" id="override_y_max" name="override_y_max" onchange="updateVis();">
+        </div>
+    </div>
+        
+</div>
+
+
+<div style="width: 90%; padding: 40px; padding-bottom:0; text-align: justify;">
+    <p style="font-size: 18px;">Citation: Ghulam Jilani Quadri and Paul Rosen. <i>Modeling the Influence of Visual Density on Cluster Perception in Scatterplots Using Topology</i>, Transactions on Visualization and Computer Graphics (Proceedings of InfoVis), 2020</p>
+    <p style="margin-top: 40px; font-size: 18px;">This work was partially supported by the National Science Foundation (IIS-1845204).</p>
+</div>
+
+
+<script>
+    let dataset = null
+    let rendered_list = []
+    let sel_index = -1
+
+    function updateNumbers() {
+        let opacity = document.getElementById("opp_amnt").value
+        let psize = document.getElementById("pnt_size").value
+        let npoints = document.getElementById("num_points").value
+        document.getElementById("current_opacity").innerHTML = opacity + "%"
+        document.getElementById("current_size").innerHTML = psize
+        document.getElementById("current_points").innerHTML = npoints + "%"
+    }
+
+    function updateImage(){
+        let opacity = document.getElementById("opp_amnt").value
+        let psize = document.getElementById("pnt_size").value
+        let npoints = document.getElementById("num_points").value
+
+        for( let i = 0; i < rendered_list.length; i++ ){
+            if( rendered_list[i].params.opacity == opacity && rendered_list[i].params.psize == psize && rendered_list[i].params.npoints == npoints ){
+                sel_index = i
+                $("#scatterplot").attr("src",rendered_list[i].image);
+                updateVis()
+                return
+            }
+        }
+
+        var xhr = new XMLHttpRequest();
+            xhr.open("POST", "generate?popacity="+opacity+"&psize="+psize+"&npoints="+npoints, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var myArr = JSON.parse(this.responseText);
+                    $("#scatterplot").attr("src",myArr.image);
+                    myArr.params = {'opacity':opacity, 'psize':psize, 'npoints':npoints}
+                    rendered_list.push(myArr)
+                    sel_index = rendered_list.length - 1
+                    document.getElementById("opp_amnt").disabled = false
+                    document.getElementById("pnt_size").disabled = false
+                    document.getElementById("num_points").disabled = false
+                    updateVis()
+                }
+            }       
+            xhr.send(dataset);
+            document.getElementById("opp_amnt").disabled = true
+            document.getElementById("pnt_size").disabled = true
+            document.getElementById("num_points").disabled = true
+    }
+
+
+    function updateVis(){
+	
+        var x_range, y_range;
+        xExt = [0,0.001];
+        yExt = [0.8,5.0];
+        // ds_names.forEach( function(key) {
+        //     ds = loaded_data[key];
+        rendered_list.forEach( ds => {
+                xExt[1] = Math.max(xExt[1], d3.max( ds['threshold'], function(f){ if( f == 'Infinity') return 0; return f;  } ) );
+                yExt[1] = Math.max(yExt[1], d3.max( ds['clusters'] ) );
+        });
+        xExt[1] *= 1.1;
+        yExt[1] += 0.1;
+
+        //xExt[0] = xExt[1]*document.getElementById("override_x_min").value;
+        xExt[1] = xExt[1]*document.getElementById("override_x_max").value;
+        //yExt[0] = yExt[1]*document.getElementById("override_y_min").value;
+        yExt[1] = yExt[1]*document.getElementById("override_y_max").value;
+
+        var chart_name = "#linechart";
+        clear_chart(chart_name);
+        add_scales(chart_name, xExt, yExt)
+        chart = init_linechart( chart_name, xExt, yExt );
+        var offset = 0.0;
+        // ds_names.forEach( function(key) {
+            rendered_list.forEach( (ds,idx) => {    
+        //     ds = loaded_data[key];
+
+                var data = [];
+                for( i = 0; i < ds['threshold'].length; i++ ){
+                    if( ds['threshold'][i] == 'Infinity' ){
+                        data.push( [ xExt[1], ds['clusters'][i]+offset ] );
+                    }
+                    else{
+                        data.push( [ ds['threshold'][i], ds['clusters'][i]+offset ] );
+                    }
+                }
+                
+                if( idx == sel_index )
+                    insert_linechart( chart, data, "selected_line" );
+                else
+                    insert_linechart( chart, data, "unselected_line", () => {
+                        document.getElementById("opp_amnt").value = ds.params.opacity
+                        document.getElementById("pnt_size").value = ds.params.psize
+                        document.getElementById("num_points").value = ds.params.npoints
+                        updateNumbers()
+                        updateImage()
+                    } );
+        });
+
+    }    
+
+    document.getElementById('import').onclick = function() {
+        var files = document.getElementById('selectFiles').files;
+        console.log(files);
+        if (files.length <= 0) {
+            return false;
+        }
+
+        var fr = new FileReader();
+
+        fr.onload = function(e) { 
+            // console.log(e);
+            // var result = JSON.parse(e.target.result);
+            // var formatted = JSON.stringify(result, null, 2);
+            //     document.getElementById('result').value = formatted;
+            // document.getElementById('result').value = e.target.result;
+            document.getElementById('show_results').style.display = 'block';
+            dataset = e.target.result
+            updateImage()
+        }
+
+        fr.readAsText(files.item(0));
+        document.getElementById('load_files').style.display = 'none';
+        
+    };
+</script>
+
+</body>
+</html>
+

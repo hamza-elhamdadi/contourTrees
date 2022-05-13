@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+venv
+__pycache__
+demos/TopoClusters/tmp/
+demos/TopoLines/entropy/
+demos/TopoLines/hera/
