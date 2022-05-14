@@ -8,7 +8,7 @@ Force-directed layouts belong to a popular class of methods used to position nod
 
 ## To run the demo:
 
-We have tested this setup on Mac and Linux distributions. 
+We have tested this setup on Mac, Linux, and Windows 11 distributions. 
 
 ### [required] Install python3
 
@@ -17,12 +17,17 @@ We have tested this setup on Mac and Linux distributions.
 
     On Mac, you can download from python.org, macports, or homebrew. You will need python3. 
 
+    On Windows, you can download from python.org or the Windows Store.
+
 ### [required] Run the code
 
-    Run the code
+    Run the code (Mac/Linux)
     > ./run.sh
     
     Everything should be installed and the code will run. If everything goes as planned, a web browser will be opened automatically for you when everything is done. If it doesn't, you can open a web browser and go to http://localhost:5350/.
+
+    Run the code (Windows)
+    > Run run.bat
     
     
 ## Citation

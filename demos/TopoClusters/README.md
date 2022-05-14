@@ -8,7 +8,7 @@ Scatterplots are used for a variety of visual analytics tasks, including cluster
        
 ## To run the demo:
 
-We have tested this setup on Mac and Linux distributions. 
+We have tested this setup on Mac, Linux, and Windows 11 distributions. 
 
 ### [required] Install python3, python3-virtualenv, and git
 
@@ -17,13 +17,18 @@ We have tested this setup on Mac and Linux distributions.
 
     On Mac, you can download from python.org, macports, or homebrew. You will need python3, python3-virtualenv, pip, git, ... maybe others 
 
+    On Windows, you can download from python.org or the Windows Store.
+
 ### [required] Run the code
 
-    Run the code
+    Run the code (Mac/Linux)
     > ./run.sh
     
     Everything should be installed and the code will run. If everything goes as planned, a web browser will be opened automatically for you when everything is done. If it doesn't, you can open a web browser and go to http://localhost:5250/.
     
+    Run the code (Windows)
+    > Run setup.bat
+    > Run run.bat        
     
 ## Citation
 
