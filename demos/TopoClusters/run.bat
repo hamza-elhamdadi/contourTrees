@@ -1,7 +1,7 @@
 
 :: Activate the environment
-venv\Scripts\activate.bat
+call venv\Scripts\activate.bat
 
 python server.py
 
-deactivate
+call deactivate

@@ -2,7 +2,7 @@
 python3 -m venv venv
 
 :: Activate the environment
-venv\Scripts\activate.bat
+call venv\Scripts\activate.bat
 
 :: Within the activated environment, use the following command to install Flask and dependancies:
 pip install wheel
@@ -15,3 +15,5 @@ cd entropy/
 pip install -r requirements.txt
 python setup.py develop
 cd ..
+
+call deactivate
