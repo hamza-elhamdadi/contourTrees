@@ -8,7 +8,7 @@ call venv\Scripts\activate.bat
 pip install wheel
 pip install numpy sklearn simplejson Flask python-dotenv watchdog blinker gunicorn matplotlib colorutils
 
-# Install Entropy library
+:: Install Entropy library
 powershell -command "Expand-Archive -Force entropy.zip entropy"
 
 cd entropy/

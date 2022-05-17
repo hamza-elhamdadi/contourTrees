@@ -108,7 +108,7 @@ def generate_image_and_threshold_plot():
     pcount = float(request.args['npoints'])/100
     print(opacity, psize, pcount)
     img_name = generate_image(request.json, opacity, psize, pcount)
-    threshold, clusters = generate_threshold_plot(20,20,img_name)
+    threshold, clusters = generate_threshold_plot(30,30,img_name)
     return app.response_class(
             response=json.dumps({'image': img_name, 'threshold': threshold, 'clusters': clusters}),
             status=200
