@@ -2,5 +2,5 @@
 .DS_Store
 venv
 __pycache__
-demos/TopoClusters/tmp/
-demos/TopoClusters/images/
+TopoClusters/tmp/
+TopoClusters/images/
